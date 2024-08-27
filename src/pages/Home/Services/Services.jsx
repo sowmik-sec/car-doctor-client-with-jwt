@@ -1,8 +1,10 @@
+import { useState } from "react";
 import useServices from "../../../hooks/useServices";
 import ServiceCard from "./ServiceCard";
 
 const Services = () => {
-  const services = useServices();
+  const [asc, setAsc] = useState(true);
+  const services = useServices(asc);
   return (
     <div className="mt-4">
       <div className="text-center">
@@ -13,6 +15,9 @@ const Services = () => {
           humour, or randomised <br /> words which do not look even slightly
           believable.{" "}
         </p>
+        <button onClick={() => setAsc(!asc)} className="btn btn-secondary">
+          {asc ? "Price: High To Low" : "Price: Low To High"}
+        </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service) => (
