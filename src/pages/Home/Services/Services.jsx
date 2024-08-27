@@ -4,7 +4,14 @@ import ServiceCard from "./ServiceCard";
 
 const Services = () => {
   const [asc, setAsc] = useState(true);
-  const services = useServices(asc);
+  const [search, setSearch] = useState("");
+  const services = useServices(asc, search);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value;
+    setSearch(searchText);
+  };
   return (
     <div className="mt-4">
       <div className="text-center">
@@ -15,6 +22,10 @@ const Services = () => {
           humour, or randomised <br /> words which do not look even slightly
           believable.{" "}
         </p>
+        <form onSubmit={handleSearch}>
+          <input type="text" name="search" />
+          <input type="submit" value="Search" className="btn" />
+        </form>
         <button onClick={() => setAsc(!asc)} className="btn btn-secondary">
           {asc ? "Price: High To Low" : "Price: Low To High"}
         </button>
